@@ -55,6 +55,14 @@ vim.g.maplocalleader = ' '
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
+--
+
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.autoindent = true
+vim.opt.smartindent = true
 
 -- Make line numbers default
 vim.o.number = true
@@ -190,7 +198,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 
 -- set font
-vim.o.guifont = 'FiraCode Nerd Font Mono:h10'
+vim.o.guifont = 'FiraCode Nerd Font Mono:h12'
 vim.g.have_nerd_font = true
 
 ---@type vim.Option
@@ -522,7 +530,7 @@ require('lazy').setup({
             analysis = {
               -- Ignore all files for analysis to exclusively use Ruff for linting
               ignore = { '*' },
-              typeCheckingMode = 'off',
+              typeCheckingMode = 'on',
             },
           },
         },
@@ -927,28 +935,6 @@ require('lazy').setup({
     },
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
-      }
-
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
-    end,
-  },
-
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -1032,6 +1018,8 @@ require('lazy').setup({
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
   require 'custom.plugins.oil',
   require 'custom.plugins.flash',
+  require 'custom.plugins.everforest',
+  require 'custom.plugins.toggleterm',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
